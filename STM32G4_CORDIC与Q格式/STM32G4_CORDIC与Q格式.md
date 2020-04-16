@@ -1,7 +1,3 @@
----
-typora-root-url: ./
----
-
 # STM32G4_CORDIC与定点带符号整数数据格式
 
 > 2019年ST推出的G4系列芯片是STM32系列第一款带有CORDIC协同处理器的芯片。CORDIC协同处理器提供某些数学函数的硬件加速，尤其是三角函数。它能加快这些函数的运算，释放处理器以执行其他任务。通常用于电机控制、测量、信号处理和许多其他应用。
@@ -12,7 +8,7 @@ typora-root-url: ./
 
 CORDIC(coordinate rotation digital computer坐标旋转数字计算机)是一种用于计算三角函数和双曲线函数的低成本逐次逼近算法。最初由Jack Volder在1959年提出，它被广泛用于早期计算器当中。CORDIC算法通过基本的加和移位运算代替乘法运算，具体原理不在此赘述。<u>*（可查阅ST官方文档：AN5325）*</u>
 
-<img src="/批注 2020-03-26 152057.png" alt="批注 2020-03-26 152057" style="zoom:67%;" />
+<img src="https://github.com/WaterFishJ/Data_type_conversion/blob/master/STM32G4_CORDIC%E4%B8%8EQ%E6%A0%BC%E5%BC%8F/%E6%89%B9%E6%B3%A8%202020-03-26%20152057.png" style="zoom:67%;" />
 
 <center>坐标旋转算法示意图</center>
 
