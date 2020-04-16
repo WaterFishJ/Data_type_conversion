@@ -8,9 +8,9 @@
 
 CORDIC(coordinate rotation digital computer坐标旋转数字计算机)是一种用于计算三角函数和双曲线函数的低成本逐次逼近算法。最初由Jack Volder在1959年提出，它被广泛用于早期计算器当中。CORDIC算法通过基本的加和移位运算代替乘法运算，具体原理不在此赘述。<u>*（可查阅ST官方文档：AN5325）*</u>
 
-<img src="https://github.com/WaterFishJ/Data_type_conversion/blob/master/STM32G4_CORDIC%E4%B8%8EQ%E6%A0%BC%E5%BC%8F/%E6%89%B9%E6%B3%A8%202020-03-26%20152057.png" style="zoom:67%;" />
+<p align="center"><img src="https://github.com/WaterFishJ/Data_type_conversion/blob/master/STM32G4_CORDIC%E4%B8%8EQ%E6%A0%BC%E5%BC%8F/%E6%89%B9%E6%B3%A8%202020-03-26%20152057.png" style="zoom:67%;" /></p>
 
-<center>坐标旋转算法示意图</center>
+<p align="center">坐标旋转算法示意图</center></p>
 
 ### 2. STM32G4中使用CORDIC
 
@@ -18,9 +18,9 @@ CORDIC(coordinate rotation digital computer坐标旋转数字计算机)是一种
 
 使用STM32CubeMX激活CORDIC，再按需选择配置NVIC或者DMA。生成代码支持HAL库和LL库。此时代码包含了CORDIC的初始化（CORDIC_Initialize），不包括CORDIC的配置（CORDIC_Configure）。需要用户自行实例化结构体CORDIC_ConfigTypeDef：
 
-<img src="/批注 2020-03-27 012200.png" alt="批注 2020-03-27 012200" style="zoom:80%;" />
+<p align="center"><img src="https://github.com/WaterFishJ/Data_type_conversion/blob/master/STM32G4_CORDIC%E4%B8%8EQ%E6%A0%BC%E5%BC%8F/%E6%89%B9%E6%B3%A8%202020-03-27%20012200.png" style="zoom:80%;" /></p>
 
-<center>结构体成员变量</center>
+<p align="center">结构体成员变量</p>
 
 **Function**包含共10种函数：余弦、正弦、方位角、取模、反正切、双曲余弦、双曲正弦、双曲反正切、自然对数、开平方。
 
@@ -34,8 +34,8 @@ CORDIC(coordinate rotation digital computer坐标旋转数字计算机)是一种
 
 配置完结构体变量，后使用CORDIC_Configure函数将数据写入CORDIC_CSR寄存器，CORDIC的初始化和配置完成。
 
-![批注 2020-03-27 145722](/批注 2020-03-27 145722.png)
-<center>CORDIC_CSR寄存器</center>
+<p align="center"><img src="https://github.com/WaterFishJ/Data_type_conversion/blob/master/STM32G4_CORDIC%E4%B8%8EQ%E6%A0%BC%E5%BC%8F/%E6%89%B9%E6%B3%A8%202020-03-27%20145722.png" style="zoom:80%;" /></p>
+<p align="center">CORDIC_CSR寄存器</p>
 
 
 
@@ -54,9 +54,9 @@ CORDIC(coordinate rotation digital computer坐标旋转数字计算机)是一种
 6. 重复第3至第6步骤；
 7. 从CORDIC_RDATA寄存器读取最后一个结果，完成计算。
 
-![批注 2020-03-27 144708](/批注 2020-03-27 144708.png)
+<p align="center"><img src="https://github.com/WaterFishJ/Data_type_conversion/blob/master/STM32G4_CORDIC%E4%B8%8EQ%E6%A0%BC%E5%BC%8F/%E6%89%B9%E6%B3%A8%202020-03-27%20144708.png" style="zoom:80%;" /></p>
 
-<center>零开销模式示意图</center>
+<p align="center">零开销模式示意图</p>
 
 
 
@@ -114,7 +114,7 @@ https://www.st.com/content/st_com/en/search.html#q=RM0440-t=resources-page=1
 
 31(0 x7fffffff)；精度是2^-31(大约5 x 10^-10)。
 
-![批注 2020-03-27 165016](/批注 2020-03-27 165016.png)
+<p align="center"><img src="https://github.com/WaterFishJ/Data_type_conversion/blob/master/STM32G4_CORDIC%E4%B8%8EQ%E6%A0%BC%E5%BC%8F/%E6%89%B9%E6%B3%A8%202020-03-27%20165016.png" style="zoom:80%;" /></p>
 $$
 Num=(-1)^s\sum_{k=0}^{30} \frac{1}{2^{31-k}}C_k
 $$
@@ -122,13 +122,13 @@ $$
 
 在q1.15格式中，数字由一个符号位和15个小数位(二进制位)表示;数值范围是-1(0x8000)到1 - 2^-15(0 x7fff)；
 
-![批注 2020-03-27 165036](/批注 2020-03-27 165036.png)
+<p align="center"><img src="https://github.com/WaterFishJ/Data_type_conversion/blob/master/STM32G4_CORDIC%E4%B8%8EQ%E6%A0%BC%E5%BC%8F/%E6%89%B9%E6%B3%A8%202020-03-27%20165036.png" style="zoom:80%;" /></p>
 $$
 Num=(-1)^s\sum_{k=0}^{14} \frac{1}{2^{15-k}}C_k
 $$
 这种格式的优点是可以将两个输入参数打包到一个32位的数据中，并且可以在一个32位的读操作中获取两个结果；但精度降低到2^-15(大约3 × 10^-5)。
 
-![批注 2020-03-27 165051](/批注 2020-03-27 165051.png)
+<p align="center"><img src="https://github.com/WaterFishJ/Data_type_conversion/blob/master/STM32G4_CORDIC%E4%B8%8EQ%E6%A0%BC%E5%BC%8F/%E6%89%B9%E6%B3%A8%202020-03-27%20165051.png" style="zoom:80%;" /></p>
 
 
 
