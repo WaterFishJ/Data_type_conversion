@@ -1,0 +1,2 @@
+# Data_type_conversion
+STM32G4使用CORDIC时候需要用到的Q1.31与Q1.15格式转换
